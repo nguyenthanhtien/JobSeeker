@@ -1,11 +1,11 @@
 import { Client, Account, Databases, Storage, Functions, Avatars, Teams, Locale } from 'appwrite';
 
+export const client = new Client();
 
 client
     .setEndpoint('https://cloud.appwrite.io/v1')
     .setProject('recruiting-platform'); // Replace with your project ID
 
-export const client = new Client();
 export const account = new Account(client);
 export const databases = new Databases(client);
 export const storage = new Storage(client);

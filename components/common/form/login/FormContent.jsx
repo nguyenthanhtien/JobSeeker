@@ -1,34 +1,58 @@
+"use client"
 import Link from "next/link";
 import LoginWithSocial from "./LoginWithSocial";
+import { account, teams } from "../../../../appwrite/appwrite";
+import React, { useState } from 'react';
 
 const FormContent = () => {
+
+  const [email, setEmail] = useState(localStorage.getItem('email') || '');
+  const [password, setPassword] = useState(localStorage.getItem('password') || '');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await account.createEmailSession(email, password);
+      console.log(response); // Success
+      const session = await account.getSession("current");
+      console.log(session); // Success
+
+    } catch (error) {
+      console.log(error); // Failure
+    }
+  }
+
+  const handleRememberMe = (checked) => {
+    if(checked) {
+      localStorage.setItem('email', email);
+      localStorage.setItem('password', password);
+    } else {
+      localStorage.removeItem('email');
+      localStorage.removeItem('password');
+    }
+   
+  }
   return (
     <div className="form-inner">
-      <h3>Login to Superio</h3>
+      <h3>Login</h3>
 
       {/* <!--Login Form--> */}
-      <form method="post">
+      <form method="post" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Username</label>
-          <input type="text" name="username" placeholder="Username" required />
+          <label>Email</label>
+          <input type="email" name="email" placeholder="Email" required onChange={e => setEmail(e.target.value)} />
         </div>
         {/* name */}
 
         <div className="form-group">
           <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            required
-          />
+          <input type="password" name="password" placeholder="Password" required onChange={e => setPassword(e.target.value)} />
         </div>
         {/* password */}
 
         <div className="form-group">
           <div className="field-outer">
             <div className="input-group checkboxes square">
-              <input type="checkbox" name="remember-me" id="remember" />
+              <input type="checkbox" name="remember-me" id="remember" onChange={e => handleRememberMe(e.target.checked)} />
               <label htmlFor="remember" className="remember">
                 <span className="custom-checkbox"></span> Remember me
               </label>

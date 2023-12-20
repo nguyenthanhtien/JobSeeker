@@ -34,6 +34,7 @@ export const login = async (loginBody: LoginInterface) => {
     const session = await api.createSession(loginBody);
     if (session) {
       const account = await api.getAccount();
+      localStorage.setItem("session", JSON.stringify(account));
       return account;
     }
   } catch (error) {
@@ -44,13 +45,18 @@ export const login = async (loginBody: LoginInterface) => {
 
 export const getSession = async () => {
   try {
-    const account = await api.getAccount();
-    return account;
+    if(localStorage.getItem("session") === null) {
+      const account = await api.getAccount();
+      return account;
+    } 
+    return localStorage.getItem("session");
+
   } catch (error) {
     console.error("Error occurred during getSession:", error);
   }
 };
 
 export const logout = async () => {
+  localStorage.removeItem("session");
   return await api.deleteCurrentSession();
 };

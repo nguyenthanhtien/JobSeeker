@@ -2,6 +2,7 @@
 import Link from "next/link";
 import LoginWithSocial from "./LoginWithSocial";
 import { account, teams } from "../../../../appwrite/appwrite";
+import { login, logout } from "@/appwrite/auth.service";
 import React, { useState } from 'react';
 
 const FormContent = () => {
@@ -11,7 +12,7 @@ const FormContent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await account.createEmailSession(email, password);
+      const response = await login({ email, password });
       console.log(response); // Success
       const session = await account.getSession("current");
       console.log(session); // Success
@@ -20,16 +21,23 @@ const FormContent = () => {
       console.log(error); // Failure
     }
   }
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    try {
+      await logout();
+    } catch (error) {
+    }
+  }
 
   const handleRememberMe = (checked) => {
-    if(checked) {
+    if (checked) {
       localStorage.setItem('email', email);
       localStorage.setItem('password', password);
     } else {
       localStorage.removeItem('email');
       localStorage.removeItem('password');
     }
-   
+
   }
   return (
     <div className="form-inner">
@@ -71,6 +79,14 @@ const FormContent = () => {
             name="log-in"
           >
             Log In
+          </button>
+          <button
+            className="theme-btn btn-style-one"
+            type="submit"
+            name="log-in"
+            onClick={() => handleLogout}
+          >
+            Logout
           </button>
         </div>
         {/* login */}

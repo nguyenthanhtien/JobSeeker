@@ -11,5 +11,4 @@ export const functions = new Functions(client);
 export const avatars = new Avatars(client);
 export const teams = new Teams(client);
 export const locale = new Locale(client);
-storage.listFiles("",)
 export { ID } from 'appwrite';

@@ -15,7 +15,7 @@ const FormContent = () => {
     e.preventDefault();
     try {
       const response = await login({ email, password });
-      if(response){
+      if (response) {
         router.push("/candidates-dashboard/dashboard");
       }
 
@@ -26,8 +26,9 @@ const FormContent = () => {
   const handleLogout = async (e) => {
     e.preventDefault();
     try {
-      await logout();
+      await account.deleteSession("current");
     } catch (error) {
+      console.log(error)
     }
   }
 
@@ -84,9 +85,8 @@ const FormContent = () => {
           </button>
           <button
             className="theme-btn btn-style-one"
-            type="submit"
-            name="log-in"
-            onClick={() => handleLogout}
+            name="log-out"
+            onClick={handleLogout}
           >
             Logout
           </button>

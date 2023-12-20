@@ -54,6 +54,5 @@ export const getSession = async () => {
 };
 
 export const logout = async () => {
-  localStorage.removeItem("session");
   return await api.deleteCurrentSession();
 };

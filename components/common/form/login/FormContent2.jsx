@@ -25,8 +25,9 @@ const FormContent2 = () => {
   const handleLogout = async (e) => {
     e.preventDefault();
     try {
-      await logout();
+      await account.deleteSession("current");
     } catch (error) {
+      console.log(error)
     }
   }
 

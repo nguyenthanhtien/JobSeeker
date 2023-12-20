@@ -45,11 +45,8 @@ export const login = async (loginBody: LoginInterface) => {
 
 export const getSession = async () => {
   try {
-    if(localStorage.getItem("session") === null) {
-      const account = await api.getAccount();
-      return account;
-    } 
-    return localStorage.getItem("session");
+    const account = await api.getAccount();
+    return account;
 
   } catch (error) {
     console.error("Error occurred during getSession:", error);

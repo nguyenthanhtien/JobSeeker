@@ -1,35 +1,66 @@
 "use client"
 import Link from "next/link";
 import LoginWithSocial from "./LoginWithSocial";
+import { account, teams } from "../../../../appwrite/appwrite";
+import { login, logout } from "@/appwrite/auth.service";
+import React, { useState } from 'react';
 
 const FormContent2 = () => {
+  const [email, setEmail] = useState(localStorage.getItem('email') || '');
+  const [password, setPassword] = useState(localStorage.getItem('password') || '');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await login({ email, password });
+      console.log(response); // Success
+      const session = await account.getSession("current");
+      console.log(session); // Success
+
+    } catch (error) {
+      console.log(error); // Failure
+    }
+  }
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    try {
+      await logout();
+    } catch (error) {
+    }
+  }
+
+  const handleRememberMe = (checked) => {
+    if (checked) {
+      localStorage.setItem('email', email);
+      localStorage.setItem('password', password);
+    } else {
+      localStorage.removeItem('email');
+      localStorage.removeItem('password');
+    }
+
+  }
   return (
     <div className="form-inner">
       <h3>Login</h3>
 
       {/* <!--Login Form--> */}
-      <form method="post">
+      <form method="post"  onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Username</label>
-          <input type="text" name="username" placeholder="Username" required />
+          <input type="email" name="email" placeholder="Email" required onChange={e => setEmail(e.target.value)} />
         </div>
         {/* name */}
 
         <div className="form-group">
           <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            required
-          />
+          <input type="password" name="password" placeholder="Password" required onChange={e => setPassword(e.target.value)} />
+
         </div>
         {/* password */}
 
         <div className="form-group">
           <div className="field-outer">
             <div className="input-group checkboxes square">
-              <input type="checkbox" name="remember-me" id="remember" />
+            <input type="checkbox" name="remember-me" id="remember" onChange={e => handleRememberMe(e.target.checked)} />
               <label htmlFor="remember" className="remember">
                 <span className="custom-checkbox"></span> Remember me
               </label>
@@ -46,8 +77,17 @@ const FormContent2 = () => {
             className="theme-btn btn-style-one"
             type="submit"
             name="log-in"
+            on
           >
             Log In
+          </button>
+          <button
+            className="theme-btn btn-style-one"
+            type="submit"
+            name="log-in"
+            onClick={() => handleLogout}
+          >
+            Logout
           </button>
         </div>
         {/* login */}

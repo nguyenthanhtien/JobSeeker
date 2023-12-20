@@ -4,18 +4,20 @@ import LoginWithSocial from "./LoginWithSocial";
 import { account, teams } from "../../../../appwrite/appwrite";
 import { login, logout } from "@/appwrite/auth.service";
 import React, { useState } from 'react';
+import { useRouter } from "next/navigation";
 
 const FormContent2 = () => {
+  const router = useRouter();
+
   const [email, setEmail] = useState(localStorage.getItem('email') || '');
   const [password, setPassword] = useState(localStorage.getItem('password') || '');
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await login({ email, password });
-      console.log(response); // Success
-      const session = await account.getSession("current");
-      console.log(session); // Success
-
+      if(response){
+        router.push("/candidates-dashboard/dashboard");
+      }
     } catch (error) {
       console.log(error); // Failure
     }

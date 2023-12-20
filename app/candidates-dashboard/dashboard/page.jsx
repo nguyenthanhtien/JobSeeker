@@ -23,7 +23,6 @@ const index = async () => {
       } catch (error) {
         router.push("/login");
       }
-
     };
 
     checkSession();

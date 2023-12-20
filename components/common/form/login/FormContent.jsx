@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link";
 import LoginWithSocial from "./LoginWithSocial";
-import { account, teams } from "../../../../appwrite/appwrite";
+import { account, teams } from "@/appwrite/appwrite";
 import { login, logout } from "@/appwrite/auth.service";
 import React, { useState } from 'react';
 import { useRouter } from "next/navigation";
@@ -27,6 +27,8 @@ const FormContent = () => {
     e.preventDefault();
     try {
       await account.deleteSession("current");
+      localStorage.removeItem("session");
+      router.push("/");
     } catch (error) {
       console.log(error)
     }

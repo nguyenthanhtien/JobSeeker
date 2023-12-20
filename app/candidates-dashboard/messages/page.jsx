@@ -16,7 +16,7 @@ const index = () => {
   useEffect(() => {
     const checkSession = async () => {
       try {
-        const session = await account.getSession("current");
+        const session = localStorage.getItem("session");
         console.log(session);
         if (!session) {
           router.push("/login");

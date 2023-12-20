@@ -26,6 +26,8 @@ const FormContent2 = () => {
     e.preventDefault();
     try {
       await account.deleteSession("current");
+      localStorage.removeItem("session");
+      router.push("/");
     } catch (error) {
       console.log(error)
     }

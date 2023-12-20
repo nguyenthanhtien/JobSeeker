@@ -41,7 +41,8 @@ let api: any = {
         ID.unique(),
         registerBody.email,
         registerBody.password,
-        registerBody.name
+        registerBody.name,
+        "1234567890"
       );
   },
 

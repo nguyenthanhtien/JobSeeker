@@ -67,10 +67,20 @@ let api: any = {
       );
   },
 
-  getDocuments: (collectionId: string, query: any) => {
-    return api
-      .provider()
-      .database.listDocuments(databaseId, collectionId, query);
+  getDocuments: (collectionId: string, query: any, limit?: number, offset?: number ) => {
+    if(limit === undefined && offset === undefined) {
+      return api
+        .provider()
+        .database.listDocuments(databaseId, collectionId, query);
+    } else {
+      return api
+        .provider()
+        .database.listDocuments(databaseId, collectionId, query,
+          [
+            Query.limit(limit),
+            Query.offset(offset)
+          ]);
+    }   
   },
 
   getDocument: (collectionId: string, documentId: string, queries: any) => {
@@ -85,9 +95,25 @@ let api: any = {
       .database.updateDocument(databaseId, collectionId, documentId, data);
   },
 
+  deleteDocument: (collectionId: string, documentId: string) => {
+    return api
+      .provider()
+      .database.deleteDocument(databaseId, collectionId, documentId);
+  },
+
   createFile: (bucketId: string, file: any) => {
     return api.provider().storage.createFile(bucketId, ID.unique(), file);
   },
+  getFile: (fileId: string) => {
+    return api.provider().storage.getFile(fileId);
+  },
+  listFiles: (bucketId: string, limit?: number, offset?: number) => {
+    if(limit === undefined && offset === undefined) {
+      return api.provider().storage.listFiles(bucketId);
+    } else {
+      return api.provider().storage.listFiles(bucketId, limit, offset);
+    }
+  }
 };
 
 export default api;

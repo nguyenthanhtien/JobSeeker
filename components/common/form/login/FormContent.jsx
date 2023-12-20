@@ -1,7 +1,15 @@
 import Link from "next/link";
 import LoginWithSocial from "./LoginWithSocial";
-
+import  { account, teams } from "../../../../appwrite/appwrite";
 const FormContent = () => {
+  const promise = account.createEmailSession('tiennguyen.aws@gmail.com', '123456789');
+  teams.updateMembership()
+  var a = account.get();
+    a.then(function (response) {
+      console.log(response); // Success
+    }, function (error) {
+        console.log(error); // Failure
+    });
   return (
     <div className="form-inner">
       <h3>Login to Superio</h3>

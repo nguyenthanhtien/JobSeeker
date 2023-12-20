@@ -1,11 +1,13 @@
 import { Client, Account, Databases, Storage, Functions, Avatars, Teams, Locale } from 'appwrite';
 
+const client = new Client()
+    .setEndpoint('http://178.128.18.92/v1')
+    .setProject('recruitingplatform');
 
-client
-    .setEndpoint('https://cloud.appwrite.io/v1')
-    .setProject('recruiting-platform'); // Replace with your project ID
+// client
+//     .setEndpoint('https://cloud.appwrite.io/v1')
+//     .setProject('recruiting-platform'); // Replace with your project ID
 
-export const client = new Client();
 export const account = new Account(client);
 export const databases = new Databases(client);
 export const storage = new Storage(client);

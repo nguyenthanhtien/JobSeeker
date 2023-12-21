@@ -26,8 +26,8 @@ const FormContent = () => {
   const handleLogout = async (e) => {
     e.preventDefault();
     try {
-      await account.deleteSession("current");
       localStorage.removeItem("session");
+      await account.deleteSession("current");
       router.push("/");
     } catch (error) {
       console.log(error)

@@ -1,9 +1,10 @@
 "use client"
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import dynamic from "next/dynamic";
 import AppliedJobs from "@/components/dashboard-pages/candidates-dashboard/applied-jobs";
 import { account } from "@/appwrite/appwrite";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+
 // export const metadata = {
 //   title: "Applied Jobs || Superio - Job Borad React NextJS Template",
 //   description: "Superio - Job Borad React NextJS Template",

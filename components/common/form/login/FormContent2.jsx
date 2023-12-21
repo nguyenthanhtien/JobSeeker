@@ -48,7 +48,7 @@ const FormContent2 = () => {
       <h3>Login</h3>
 
       {/* <!--Login Form--> */}
-      <form method="post"  onSubmit={handleSubmit}>
+      <form method="post" onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Username</label>
           <input type="email" name="email" placeholder="Email" required onChange={e => setEmail(e.target.value)} />

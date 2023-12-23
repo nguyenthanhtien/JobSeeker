@@ -1,4 +1,4 @@
-import { Client, Account, Databases, Storage, Functions, Avatars, Teams, Locale } from 'appwrite';
+import { Client, Account, Databases, Storage, Functions, Avatars, Teams, Locale, Permission, Role } from 'appwrite';
 
 const client = new Client()
                 .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT)
@@ -11,4 +11,6 @@ export const functions = new Functions(client);
 export const avatars = new Avatars(client);
 export const teams = new Teams(client);
 export const locale = new Locale(client);
+export const permission = Permission;
+export const role = Role;
 export { ID } from 'appwrite';

@@ -15,7 +15,7 @@ const FormContent2 = () => {
       const response = await register({ email, password, name: fullName });
       console.log(response);
       if (response) {
-        router.push("/login");
+        router.push("/");
       }
     } catch (error) {
       console.log(error); // Failure

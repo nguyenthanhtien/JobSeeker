@@ -17,10 +17,16 @@ const FormContent = () => {
       const response = await login({ email, password });
       if (response) {
         router.push("/candidates-dashboard/dashboard");
+      } 
+      else
+      {
+        router.push("/login");
       }
 
     } catch (error) {
       console.log(error); // Failure
+      router.push("/login");
+
     }
   }
   const handleLogout = async (e) => {

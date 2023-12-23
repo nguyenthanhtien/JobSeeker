@@ -1,4 +1,4 @@
-import { account, teams } from "../../../../appwrite/appwrite";
+import { account, teams } from "@/appwrite/appwrite";
 
 const LoginWithSocial = () => {
   const loginWithSocial = async (provider) => { // Step 3

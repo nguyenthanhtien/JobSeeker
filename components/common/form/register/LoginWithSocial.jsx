@@ -1,4 +1,10 @@
+import { account, teams } from "@/appwrite/appwrite";
+
 const LoginWithSocial = () => {
+  const loginWithSocial = async (provider) => { // Step 3
+    const url = account.createOAuth2Session(provider);
+    console.log(url);
+  };
   return (
     <div className="btn-box row">
       <div className="col-lg-6 col-md-12">
